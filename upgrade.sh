@@ -20,6 +20,12 @@
     exit 1
   }
 
+  for cmd in wget mktemp tar find systemctl cp rm chown xargs sort; do
+    if ! command -v $cmd > /dev/null 2>&1; then
+      error "command: $cmd not found!"
+    fi
+  done
+
   if [ "$(id -u)" != "0" ]; then
     error "Please give me root permission"
   fi
