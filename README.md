@@ -10,6 +10,10 @@ Please note that the script only consider the default Mattermost installation, i
 
 Using root permission to execute the `upgrade.sh` script.
 
-Specify the target version and install path by environment variable `$MATTERMOST_VERSION` and `$INSTALL_PATH`, for example: `MATTERMOST_VERSION=5.38.2 INSTALL_PATH=/opt sudo -E ./upgrade.sh`
+Specify the target version and install path by environment variable `$MATTERMOST_VERSION` and `$INSTALL_PATH`, for example:
+
+```sh
+MATTERMOST_VERSION="5.38.2" INSTALL_PATH="/opt" sudo -E ./upgrade.sh
+```
 
 By default, the `$INSTALL_PATH` is set to `/opt`, if you didn't use another location for your Mattermost instance, you can ignore that variable.
