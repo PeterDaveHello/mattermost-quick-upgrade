@@ -1,8 +1,8 @@
 # Mattermost Quick Upgrade
 
-A simple shell script to help quickly upgade an Mattermost Self-Managed Server on systemd based Linux system.
+A simple shell script to help quickly upgrade an Mattermost Self-Managed Server on systemd based Linux system.
 
-The logic inside is basically ported from the steps in [Mattermost official upgade guide](https://docs.mattermost.com/administration/upgrade.html).
+The logic inside is basically ported from the steps in [Mattermost official upgrade guide](https://docs.mattermost.com/administration/upgrade.html).
 
 Please note that the script only consider the default Mattermost installation, if you store TLSCert/TLSKey files or other information within your Mattermost folder, you need to modify the script to prevent those files been cleared during the upgrade process.
 
