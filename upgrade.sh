@@ -74,5 +74,5 @@
   rm -rf "${TMP}"
 
   echoCyan "Upgrade process is finished!"
-  echoCyan "Please give it a few seconds to finish the migration and bootstrap processbootstrap process.."
+  echoCyan "Please give it a few seconds to finish the migration and bootstrap process..."
 }
