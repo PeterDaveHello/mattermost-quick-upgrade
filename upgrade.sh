@@ -39,13 +39,13 @@
   fi
 
   echoCyan "Preparing working directory and install package"
-  TMP="$(mktemp -d --suffix=-mattermost)"
+  TEMP_DIR="$(mktemp -d --suffix=-mattermost)"
 
-  if ! cd "${TMP}"; then
-    error "Change directory to ${TMP} failed"
+  if ! cd "${TEMP_DIR}"; then
+    error "Change directory to ${TEMP_DIR} failed"
   fi
 
-  wget "https://releases.mattermost.com/$MATTERMOST_VERSION/mattermost-$MATTERMOST_VERSION-linux-amd64.tar.gz" -O "mattermost-linux-amd64.tar.gz"
+  wget -O "mattermost-linux-amd64.tar.gz" "https://releases.mattermost.com/$MATTERMOST_VERSION/mattermost-$MATTERMOST_VERSION-linux-amd64.tar.gz"
 
   tar -xf mattermost-linux-amd64.tar.gz --transform='s,^[^/]\+,\0-upgrade,'
 
@@ -62,16 +62,28 @@
   fi
 
   echoCyan "Clearing up Mattermost directory"
-  find mattermost/ mattermost/client/ -mindepth 1 -maxdepth 1 \! \( -type d \( -path mattermost/client -o -path mattermost/client/plugins -o -path mattermost/config -o -path mattermost/logs -o -path mattermost/plugins -o -path mattermost/data -o -path mattermost/yourFolderHere \) -prune \) | sort | xargs rm -r
+  find mattermost/ \
+      mattermost/client/ \
+      -mindepth 1 -maxdepth 1 \
+      ! \( -type d \
+      \( \
+          -path mattermost/client \
+          -o -path mattermost/client/plugins \
+          -o -path mattermost/config \
+          -o -path mattermost/logs \
+          -o -path mattermost/plugins \
+          -o -path mattermost/data \
+          -o -path mattermost/yourFolderHere \
+      \) -prune \) | sort | xargs rm -r
 
   echoCyan "Copy new files into Mattermost path"
-  cp -an "${TMP}/mattermost-upgrade/." "${INSTALL_PATH}/mattermost/"
+  cp -an "${TEMP_DIR}/mattermost-upgrade/." "${INSTALL_PATH}/mattermost/"
 
   echoCyan "Starting Mattermost service"
   systemctl start mattermost
 
   echoCyan "Cleaning up temporary working direcroty"
-  rm -rf "${TMP}"
+  rm -rf "${TEMP_DIR}"
 
   echoCyan "Upgrade process is finished!"
   echoCyan "Please give it a few seconds to finish the migration and bootstrap process..."
