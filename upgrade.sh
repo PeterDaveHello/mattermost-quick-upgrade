@@ -31,7 +31,7 @@
   fi
 
   echoCyan "Setting Mattermost version and install path"
-  MATTERMOST_VERSION="${MATTERMOST_VERSION:-5.38.2}"
+  MATTERMOST_VERSION="${MATTERMOST_VERSION:-7.3.0}"
   INSTALL_PATH="${INSTALL_PATH:-/opt}"
 
   if ! [ -e "${INSTALL_PATH}/mattermost/bin/mattermost" ]; then
